@@ -1,0 +1,7 @@
+#wrap
+  .container.text-middle.page-header
+    %h1 Rss Reader
+  %ul
+    - @entries.each do |entry|
+      %li
+        = link_to(entry.title, entry.url, :target => "_blank")

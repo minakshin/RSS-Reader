@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 20161011070557) do
 
   create_table "entries", force: :cascade do |t|
     t.string   "title"
-    t.datetime "published"
+    t.datetime "published_date"
     t.text     "content"
     t.string   "url"
     t.string   "author"
     t.integer  "feed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.index ["feed_id"], name: "index_entries_on_feed_id", using: :btree
   end
 

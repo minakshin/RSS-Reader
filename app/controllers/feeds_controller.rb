@@ -1,6 +1,5 @@
 # FeedsController
 class FeedsController < ApplicationController
-  include FeedReadable
   before_filter :find_feed, only: [:show, :edit, :update, :destroy]
 
   def index
