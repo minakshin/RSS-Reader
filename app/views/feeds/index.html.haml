@@ -1,0 +1,25 @@
+#wrap
+  .container.text-middle.page-header
+    %h1 Your Feeds
+    .container
+      .middle-heading.clearfix
+        = link_to 'Add', new_feed_path, {class: 'pull-right btn btn-primary'}
+  .container
+    %table.table.table-striped{"data-sort-name" => "name", "data-sort-order" => "desc"}
+      %thead
+        %tr
+          %th{"data-field" => "name", "data-sortable" => "true"} Team ID
+          %th{"data-field" => "url", "data-sortable" => "true"} Name
+          %th{"data-field" => "desc", "data-sortable" => "false"} Show
+      %tbody
+        - @feeds.each do |feed|
+          %tr
+            %td= feed.name
+            %td= feed.url
+            %td= feed.description
+            %td
+              = link_to 'View', feed_path(feed)
+            %td
+              = link_to 'Edit', edit_feed_path(feed)
+            %td
+              = link_to 'Destroy',feed, method: :delete, data: { confirm: 'Are you sure?' }
