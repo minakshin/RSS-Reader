@@ -1,0 +1,19 @@
+= form_for(@feed) do |f|
+  .field.form-horizontal.clearfix
+    .form-group
+      = f.label('Name', class: 'mandatory col-sm-2 control-label')
+      .col-sm-8
+        = f.text_field :name, placeholder: 'Name', maxlength: '55', class: 'form-control'
+    .form-group
+      = f.label('URL', class: 'mandatory col-sm-2 control-label')
+      .col-sm-8
+        = f.text_field :url, placeholder: 'Url', class: 'form-control'
+    .form-group
+      = f.label('Description', class: 'mandatory col-sm-2 control-label')
+      .col-sm-8
+        = f.text_area :description, placeholder: 'Description', maxlength: '255', class: 'form-control'
+
+    .form-group
+      .col-sm-8.col-sm-offset-2
+        = f.submit 'Add', class: 'btn btn-primary'
+        = link_to 'Cancel', feeds_path
