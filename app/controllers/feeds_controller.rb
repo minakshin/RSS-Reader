@@ -1,6 +1,6 @@
 # FeedsController
 class FeedsController < ApplicationController
-  before_filter :find_feed, only: [:show, :edit, :update, :destroy]
+  before_action :find_feed, only: [:show, :edit, :update, :destroy]
 
   def index
     @feeds = Feed.all
