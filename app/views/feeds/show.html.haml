@@ -1,0 +1,14 @@
+%p#notice= notice
+.jumbotron
+  %p
+    %strong= 'Name :'
+    = @feed.name
+    %br
+    %strong= 'URL'
+    = @feed.url
+    %br
+    %strong= 'Description'
+    = @feed.description
+  = link_to 'edit', edit_feed_path(@feed)
+  |
+  = link_to 'back', feeds_path

@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}
+    %title= RSSReader
+    = favicon_link_tag 'favicon.ico'
+    %meta{charset: 'utf-8'}
+    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    #wrap
+      = render 'shared/header'
+      .container
+        .row
+          .col-md-12
+            - flash.each do |key, value|
+              %div{class: "flash-message alert alert-#{key}"}= value
+            = yield
+    = render 'shared/footer'
