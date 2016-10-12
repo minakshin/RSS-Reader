@@ -8,9 +8,9 @@
     %table.table.table-striped{"data-sort-name" => "name", "data-sort-order" => "desc"}
       %thead
         %tr
-          %th{"data-field" => "name", "data-sortable" => "true"} Team ID
-          %th{"data-field" => "url", "data-sortable" => "true"} Name
-          %th{"data-field" => "desc", "data-sortable" => "false"} Show
+          %th{"data-field" => "name", "data-sortable" => "true"} Name
+          %th{"data-field" => "url", "data-sortable" => "true"} URL
+          %th{"data-field" => "desc", "data-sortable" => "false"} Description
       %tbody
         - @feeds.each do |feed|
           %tr

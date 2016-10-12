@@ -1,5 +1,6 @@
 # FeedsController
 class FeedsController < ApplicationController
+  before_action :authenticate, except: [:index, :show]
   before_action :find_feed, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -14,8 +15,8 @@ class FeedsController < ApplicationController
   end
 
   def create
-    feed = Feed.new(feed_params)
-    if feed.save
+    @feed = Feed.new(feed_params)
+    if @feed.save
       flash[:success] = 'Feed added successfully!'
       redirect_to feeds_path
     else
@@ -50,5 +51,13 @@ class FeedsController < ApplicationController
 
   def feed_params
     params.require(:feed).permit(:name, :url, :description)
+  end
+
+  def authenticate
+    return if Rails.env.test?
+    authenticate_or_request_with_http_basic do |username, password|
+      username == ENV['AUTH_USERNAME'] &&
+        password == ENV['AUTH_PASSWORD']
+    end
   end
 end
