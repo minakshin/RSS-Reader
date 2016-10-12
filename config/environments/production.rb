@@ -83,4 +83,6 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  ENV['AUTH_USERNAME'] = 'rss'
+  ENV['AUTH_PASSWORD'] = 'rss@123'
 end

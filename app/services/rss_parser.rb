@@ -1,35 +1,39 @@
+require 'rss'
 # Service For parsing rss feeds
 class RssParser
-  require 'rss'
   attr_accessor :feed
 
-  def initialize(object)
-    @feed = object
+  def initialize(feed)
+    @feed = feed
   end
 
-  def process
-    read_feed
+  def parse!
+    extract_feed
   end
 
   private
 
-  def read_feed
-    parse_feed = RSS::Parser.parse(feed.url)
-    parse_feed.items.map do |item|
-      Rails.logger.info "Feeding entries for #{item.title}"
-      begin
-        feed_entries(item)
-      rescue
-        Rails.logger.info "error for ==  #{item.title}"
-      end
+  def rss_feed
+    @rss_feed ||= RSS::Parser.parse(feed.url)
+  end
+
+  def extract_feed
+    return if rss_feed.nil? || rss_feed.items.nil?
+    rss_feed.items.each do |item|
+      next unless item
+      update_entries(item)
     end
   end
 
-  def feed_entries(item)
-    entry = feed.entries.where(title: item.title).first_or_initialize
-    entry.update_attributes(
-      content: item.description, author: item.author,
-      url: item.link, published_date: item.pubDate
+  def update_entries(item)
+    entry = feed.entries.find_or_initialize_by(
+      title: item.title
+    )
+    entry.update_attributes!(
+      content: item.description,
+      author: item.author,
+      url: item.link,
+      published_date: item.pubDate
     )
   end
 end
